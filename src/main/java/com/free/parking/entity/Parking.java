@@ -19,6 +19,9 @@ public class Parking implements Serializable {
     @Column(name = "counter")
     private Integer counter;
 
+    @Column(name = "place")
+    private Integer place;
+
     public Parking() {
     }
 
@@ -28,6 +31,14 @@ public class Parking implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getPlace() {
+        return place;
+    }
+
+    public void setPlace(Integer place) {
+        this.place = place;
     }
 
     public Integer getCounter() {
@@ -43,6 +54,7 @@ public class Parking implements Serializable {
         return "Parking{" +
                 "id=" + id +
                 ", counter=" + counter +
+                ", place=" + place +
                 '}';
     }
 }

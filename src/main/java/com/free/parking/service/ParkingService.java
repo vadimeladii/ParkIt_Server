@@ -1,6 +1,5 @@
 package com.free.parking.service;
 
-import com.free.parking.entity.Mobile;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -16,4 +15,8 @@ public interface ParkingService {
     ResponseEntity<String> send();
 
     void addToken(String token);
+
+    Integer place();
+
+    void editPlace(Integer place);
 }

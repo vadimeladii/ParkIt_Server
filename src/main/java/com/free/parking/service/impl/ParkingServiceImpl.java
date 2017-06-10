@@ -39,7 +39,7 @@ public class ParkingServiceImpl implements ParkingService {
     public void increment() {
         parkingRepository.increment();
         int counter = counter();
-        if (10 - counter < 5) {
+        if (place() - counter < 5) {
             send();
         }
     }
@@ -48,7 +48,6 @@ public class ParkingServiceImpl implements ParkingService {
     @Transactional
     public void decrement() {
         parkingRepository.decrement();
-
     }
 
     @Override
@@ -68,6 +67,17 @@ public class ParkingServiceImpl implements ParkingService {
     }
 
     @Override
+    public Integer place() {
+        return parkingRepository.findOne((long) 1).getPlace();
+    }
+
+    @Override
+    @Transactional
+    public void editPlace(Integer place) {
+        parkingRepository.editPlace(place);
+    }
+
+    @Override
     public ResponseEntity<String> send() {
         mobileRepository.findAll().forEach(mobile -> {
             sendNotification(mobile.getToken(), counter());
@@ -82,7 +92,7 @@ public class ParkingServiceImpl implements ParkingService {
         body.put("sound", "default");
 
         JSONObject notification = new JSONObject();
-        notification.put("body", "There are " + (10 - counter) + " places left");
+        notification.put("body", "There are " + (place() - counter) + " places left");
         notification.put("title", "ParkIt");
 
         body.put("notification", notification);

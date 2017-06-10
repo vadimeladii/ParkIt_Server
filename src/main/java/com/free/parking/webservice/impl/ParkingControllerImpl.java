@@ -52,7 +52,8 @@ public class ParkingControllerImpl {
     @RequestMapping(value = "/add/token/{token}", method = RequestMethod.GET, headers = "Accept=application/json")
     @ResponseStatus(value = HttpStatus.OK)
     @CrossOrigin
-    public ResponseEntity<Void> addToken(@PathVariable("token") String token) {
+    public ResponseEntity<Void> addToken(@PathVariable("token")
+    String token) {
         parkingService.addToken(token);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
@@ -62,6 +63,22 @@ public class ParkingControllerImpl {
     @CrossOrigin
     public ResponseEntity<String> send() {
         return parkingService.send();
+    }
+
+    @RequestMapping(value = "/place/", method = RequestMethod.GET, headers = "Accept=application/json")
+    @ResponseStatus(value = HttpStatus.OK)
+    @CrossOrigin
+    public ResponseEntity<Integer> place() {
+        return ResponseEntity.ok(parkingService.place());
+    }
+
+    @RequestMapping(value = "/place/{place}", method = RequestMethod.GET, headers = "Accept=application/json")
+    @ResponseStatus(value = HttpStatus.OK)
+    @CrossOrigin
+    public ResponseEntity<Void> editPlace(@PathVariable("place")
+    Integer place) {
+        parkingService.editPlace(place);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
 }

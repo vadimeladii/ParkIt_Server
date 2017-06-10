@@ -15,7 +15,7 @@ import org.springframework.dao.annotation.PersistenceExceptionTranslationPostPro
 public class DataBaseConfig {
 
     @Autowired
-    protected Environment environment;
+    Environment environment;
 
     Properties properties() {
         Properties properties = new Properties();

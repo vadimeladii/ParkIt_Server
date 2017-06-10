@@ -18,13 +18,13 @@ import com.free.parking.webservice.impl.ParkingControllerImpl;
 public class ParkingControllerConfig {
 
     @Autowired
-    public ParkingRepository parkingRepository;
+    private ParkingRepository parkingRepository;
 
     @Autowired
-    public AndroidPushNotificationsService androidPushNotificationsService;
+    private AndroidPushNotificationsService androidPushNotificationsService;
 
     @Autowired
-    public MobileRepository mobileRepository;
+    private MobileRepository mobileRepository;
 
     @Bean
     public ParkingService parkingService(){
