@@ -1,0 +1,89 @@
+group 'com.free.parking'
+version '1.0-SNAPSHOT'
+
+apply plugin: "war"
+apply plugin: 'docker'
+apply plugin: "org.sonarqube"
+
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath('se.transmode.gradle:gradle-docker:1.2')
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.2.1"
+    }
+}
+
+ext {
+    spring_version = "4.3.3.RELEASE"
+    junit_version = "4.12"
+    fasterxml_jackson = "2.8.5"
+}
+
+
+allprojects {
+    apply plugin: "java"
+    apply plugin: "idea"
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+}
+
+//task "create-dirs" << {
+//    sourceSets*.java.srcDirs*.each { it.mkdirs() }
+//    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+//}
+
+//task buildDocker(type: Docker, dependsOn: build) {
+//    push = true
+//    applicationName = war.baseName
+//    dockerfile = file('src/main/docker/Dockerfile')
+//    doFirst {
+//        copy {
+//            from war
+//            into stageDir
+//        }
+//    }
+//}
+
+dependencies {
+    // spring 4.3.2
+    compile group: 'org.springframework', name: 'spring-context', version: spring_version
+    compile group: 'org.springframework', name: 'spring-context-support', version: spring_version
+    compile group: 'org.springframework', name: 'spring-webmvc', version: spring_version
+    compile group: 'org.springframework', name: 'spring-core', version: spring_version
+    compile group: 'org.springframework', name: 'spring-web', version: '4.3.3.RELEASE'
+
+    //spring database
+    compile group: 'org.springframework', name: 'spring-jdbc', version: spring_version
+    compile group: 'org.springframework', name: 'spring-orm', version: spring_version
+    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.10.5.RELEASE'
+
+    // hibernate
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.5.Final'
+
+    // jackson
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
+
+    // servlet
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+
+    //json-simple
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+
+    //postgresql
+    compile group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
+
+    // swagger
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.4.0'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.4.0'
+}
+
