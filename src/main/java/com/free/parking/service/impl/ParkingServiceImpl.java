@@ -39,7 +39,7 @@ public class ParkingServiceImpl implements ParkingService {
     public void increment() {
         parkingRepository.increment();
         int counter = counter();
-        if (place() - counter < 10) {
+        if (counter < 10) {
             send();
         }
     }
@@ -92,7 +92,7 @@ public class ParkingServiceImpl implements ParkingService {
         body.put("sound", "default");
 
         JSONObject notification = new JSONObject();
-        notification.put("body", "There are " + (place() - counter) + " places left");
+        notification.put("body", "There are " + (counter) + " places left");
         notification.put("title", "ParkIt");
 
         body.put("notification", notification);
