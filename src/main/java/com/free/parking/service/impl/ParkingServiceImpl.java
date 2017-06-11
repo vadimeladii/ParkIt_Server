@@ -39,7 +39,7 @@ public class ParkingServiceImpl implements ParkingService {
     public void increment() {
         parkingRepository.increment();
         int counter = counter();
-        if (place() - counter < 5) {
+        if (place() - counter < 10) {
             send();
         }
     }
@@ -52,7 +52,7 @@ public class ParkingServiceImpl implements ParkingService {
 
     @Override
     public Integer counter() {
-        return parkingRepository.findOne((long) 1).getCounter();
+        return (place() - parkingRepository.findOne((long) 1).getCounter());
     }
 
     @Override
